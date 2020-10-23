@@ -1,0 +1,23 @@
+<h1>{{ title }}</h1>
+
+<h2>We offer the following items in our store:</h2>
+
+<div>
+{{#each categories}}
+  <a href={{this.url}}><h2>{{this.name}}</h2></a>
+  <ul>
+  {{#each ../items}}
+    {{#match_cat this ../this}}
+      <li>
+        <a href={{this.url}}>{{this.name}}</a>
+        <ul>
+          <li>Brand: <a href={{this.brand.url}}>{{this.brand.name}}</a></li>
+          <li>Price: {{this.price}}</li>
+          <li>Stock: {{this.stock}}</li>
+        </ul>
+      </li>
+    {{/match_cat}}
+  {{/each}}
+  </ul>
+{{/each}}
+</div>

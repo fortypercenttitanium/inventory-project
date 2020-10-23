@@ -1,21 +1,45 @@
+require('dotenv').config();
 var createError = require('http-errors');
 var express = require('express');
 var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 const mongoose = require('mongoose');
+const {
+	allowInsecurePrototypeAccess,
+} = require('@handlebars/allow-prototype-access');
+const Handlebars = require('handlebars');
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
+const catalogRouter = require('./routes/catalog');
+const exhbs = require('express-handlebars');
+const helpers = require('./helpers/helpers');
 var app = express();
 
 const mongoDB = process.env.MONGODB_URL;
-mongoose.connect(mongoDB, { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(
+	mongoDB,
+	{ useNewUrlParser: true, useUnifiedTopology: true },
+	function (err) {
+		if (err) {
+			console.error(err);
+		}
+	}
+);
 const db = mongoose.connection;
 db.on('error', console.error.bind(console, 'MongoDB connection error:'));
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'ejs');
+app.engine(
+	'.hbs',
+	exhbs({
+		helpers: helpers,
+		extname: '.hbs',
+		handlebars: allowInsecurePrototypeAccess(Handlebars),
+	})
+);
+app.set('view engine', 'hbs');
 
 app.use(logger('dev'));
 app.use(express.json());
@@ -25,6 +49,7 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', indexRouter);
 app.use('/users', usersRouter);
+app.use('/catalog', catalogRouter);
 
 // catch 404 and forward to error handler
 app.use(function (req, res, next) {
