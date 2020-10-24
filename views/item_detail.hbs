@@ -1,0 +1,10 @@
+<h1>{{ title }}</h1>
+
+<div style="padding:1rem;">
+  <h2>{{item.name}}</h2>
+  <h2 style="color:green">${{item.price}}</h2>
+  <p style="color:red">{{item.stock}} in stock</p>
+<h3>Made by: {{item.brand.name}}</h3>
+<h3>Description: {{item.description}}</h3>
+<p>Found in: {{#each item.category}}{{this.name}}  {{/each}}</p>
+</div>

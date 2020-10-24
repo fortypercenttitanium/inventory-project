@@ -55,7 +55,19 @@ const item_update_post = (req, res, next) => {
 	res.send('Not yet implemented');
 };
 const item_detail = (req, res, next) => {
-	res.send('Not yet implemented');
+	Item.findById(req.params.id)
+		.populate('category')
+		.populate('brand')
+		.exec((err, item) => {
+			if (err) next(err);
+			if (item == null) {
+				const err = new Error('Item not found');
+				err.status = 404;
+				throw err;
+			} else {
+				res.render('item_detail', { title: 'Item details', item });
+			}
+		});
 };
 const item_list = (req, res, next) => {
 	async.parallel(

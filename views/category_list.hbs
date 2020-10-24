@@ -1,0 +1,8 @@
+<h1> {{title}} </h1>
+
+<div style="padding:1rem;">
+  {{#each categories}}
+    <a href={{this.url}}><h2>{{this.name}}</h2></a>
+    <p style="margin-left:10px;">{{this.description}}</p>
+  {{/each}}
+</div>

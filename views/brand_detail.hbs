@@ -1,0 +1,20 @@
+<h1>{{title}}</h1>
+
+<div style="padding:1rem;">
+  <h2>We sell these items by {{brand.name}}:</h2>
+  <ul>
+    {{#if items}}
+      {{#each items}}
+        <a href={{this.url}}>
+          <li>{{this.name}}</li>
+        </a>
+        <ul>
+          <li style="color:green;">Price: {{this.price}}</li>
+          <li  style="color:red;">In stock: {{this.stock}}</li>
+        </ul>
+      {{/each}}
+    {{else}}
+    <li>No items by this brand currently for sale</li>
+    {{/if}}
+  </ul>
+</div>
