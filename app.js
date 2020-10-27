@@ -14,6 +14,8 @@ var usersRouter = require('./routes/users');
 const catalogRouter = require('./routes/catalog');
 const exhbs = require('express-handlebars');
 const helpers = require('./helpers/helpers');
+const compression = require('compression');
+const helmet = require('helmet');
 var app = express();
 
 const mongoDB = process.env.MONGODB_URL;
@@ -41,6 +43,8 @@ app.engine(
 );
 app.set('view engine', 'hbs');
 
+app.use(compression());
+app.use(helmet());
 app.use(logger('dev'));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
