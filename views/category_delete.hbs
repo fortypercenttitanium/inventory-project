@@ -1,0 +1,19 @@
+<h1>{{title}}</h1>
+<h2>{{category.name}}</h2>
+<h3>{{category.description}}</h3>
+{{#if items}}
+<p>Before deleting this category, first edit or delete these items in the category:</p>
+<ul>
+{{#each items}}
+  <li><a href={{this.url}}>{{this.name}} - {{this.brand.name}}</a></li>
+  {{/each}}
+</ul>
+{{else}}
+<p>Do you really want to delete this category?</p>
+<form action="" method="POST">
+  <div>
+    <input type="hidden" id="category_id" name="category_id" required value={{category._id}}>
+  </div>
+  <button type="submit">Delete</button>
+</form>
+{{/if}}

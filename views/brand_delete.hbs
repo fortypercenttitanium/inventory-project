@@ -1,0 +1,18 @@
+<h1>{{title}}</h1>
+<h2>{{brand.name}}</h2>
+{{#if items}}
+<p>Before deleting this brand, first delete these items in stock from this brand:</p>
+<ul>
+{{#each items}}
+  <li><a href={{this.url}}>{{this.name}}</a></li>
+  {{/each}}
+</ul>
+{{else}}
+<p>Do you really want to delete this brand?</p>
+<form action="" method="POST">
+  <div>
+    <input type="hidden" id="brand_id" name="brand_id" required value={{brand._id}}>
+  </div>
+  <button type="submit">Delete</button>
+</form>
+{{/if}}

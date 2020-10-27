@@ -1,0 +1,11 @@
+<h1>{{title}}</h1>
+<h2>{{item.name}}</h2>
+<h3>Brand: {{item.brand.name}}</h3>
+<p>{{item.description}}</p>
+<p>Do you really want to delete this item?</p>
+<form action="" method="POST">
+  <div>
+    <input type="hidden" id="item_id" name="item_id" required value={{item._id}}>
+  </div>
+  <button type="submit">Delete</button>
+</form>

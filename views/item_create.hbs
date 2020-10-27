@@ -1,0 +1,35 @@
+<h1>{{title}}</h1>
+
+<div>
+  <form method="POST" action="">
+    <div style='display:block;'>
+      <input name="name" id="name" type="text" required placeholder="Enter item name" value="{{name_exists item}}">
+      <textarea name="description" id="description" style="padding:5px;" required placeholder="Enter description">{{description_exists item}}</textarea>
+      <input name="price" id="price" type="text" required placeholder="Enter item price" value="{{price_exists item}}">
+      <input name="stock" id="stock" type="text" required placeholder="Enter amount in stock" value="{{stock_exists item}}">
+      <select name="brand" id="brand" required>
+        <option selected hidden disabled>Select brand:</option>
+        {{#each brands}}
+        <option {{check_selected_brand ../item this}} value="{{this._id}}" id="{{this.name}}">{{this.name}}</option>
+        {{/each}}
+      </select>
+      <h3 class="form-label">Select categories (min 1):</h3>
+        {{#each categories}}
+      <div>
+        <input class="no-margin" type="checkbox" value="{{this._id}}" id="{{this._id}}" name="category" {{check_selected_category ../item this}}></input>
+        <label for="{{this._id}}" id="{{this.name}}">{{this.name}}</label>
+      </div>
+        {{/each}}
+      <button style="padding:4px;" type="submit">Submit</button>
+    </div>
+    
+  </form>
+</div>
+
+{{#if errors }}
+<ul>
+	{{#each errors}}
+	<li>{{ this.msg }}</li>
+	{{/each}}
+</ul>
+{{/if}}

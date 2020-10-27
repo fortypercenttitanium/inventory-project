@@ -4,7 +4,14 @@
   <h2>{{item.name}}</h2>
   <h2 style="color:green">${{item.price}}</h2>
   <p style="color:red">{{item.stock}} in stock</p>
-<h3>Made by: {{item.brand.name}}</h3>
+<h3>Made by: <a href={{item.brand.url}}>{{item.brand.name}}</a></h3>
 <h3>Description: {{item.description}}</h3>
-<p>Found in: {{#each item.category}}{{this.name}}  {{/each}}</p>
+<p>Found in: {{#each item.category}}<a href={{this.url}}>{{this.name}}</a>   {{/each}}</p>
 </div>
+<hr>
+		<p>
+			<a href={{delete_page item.url}}>Delete item</a>
+		</p>
+		<p>
+			<a href={{update_page item.url}}>Update item</a>
+		</p>
